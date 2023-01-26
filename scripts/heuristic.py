@@ -34,12 +34,18 @@ def calculate_heuristic(goal):
             grid[i][j] = goal[len(grid[0])*i+j][2]
             if grid[i][j]>0:
                 block_cost = block_cost_calc(block_cost, i, j, grid[i][j])
+    max_b = 1
+    for i in range(len(block_cost)):
+        for j in range(len(block_cost[0])):
+            if block_cost[i][j]>max_b:
+                max_b = block_cost[i][j]
+    block_cost = block_cost/max_b
     print(grid, "\n")
     print(block_cost, "\n")
     return block_cost
 
 def main():
-    for filename in glob.glob("/home/biorobotics/himacc/worlds/termes_informative/p03.pddl"):
+    for filename in glob.glob("/home/biorobotics/himacc/worlds/termes_informative/p18.pddl"):
         goal = read_file(filename)
         h = calculate_heuristic(goal)
 

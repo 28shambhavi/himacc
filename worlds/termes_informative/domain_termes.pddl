@@ -36,7 +36,7 @@
 
 (:functions
    (block_cost ?p - position)
-   (total_cost)
+   (total-cost)
    )
 
 
@@ -46,8 +46,8 @@
     (and
         (height ?bpos ?hbefore)
         (SUCC ?hafter ?hbefore)
-        (has-block)
-        (not (IS-DEPOT ?bpos))
+        ;(has-block)
+        ;(not (IS-DEPOT ?bpos))
         (and (NEIGHBOR ?bpos ?n1) (height ?n1 ?hbefore))
         ; true if any of the neighbors of bpos has height hbefore
     )                
@@ -55,56 +55,55 @@
     (and
         (not (height ?bpos ?hbefore))
         (height ?bpos ?hafter)
-        (not (has-block))
-        (increase (total_cost) (block_cost ?bpos))
+        ;(not (has-block))
+        (increase (total-cost) (block_cost ?bpos))
     )
 )
 
 (:action remove-block
-    :parameters (?bpos - position ?hbefore - numb ?hafter - numb)
+    :parameters (?bpos - position ?n1 - position ?hbefore - numb ?hafter - numb)
     :precondition
     (and
         ;(NEIGHBOR ?rpos ?bpos)
         ;(height ?rpos ?hafter)
         (height ?bpos ?hbefore)
         (SUCC ?hbefore ?hafter)
-        (not (has-block))
-        
+        ;(not (has-block))
+        (and (NEIGHBOR ?bpos ?n1) (height ?n1 ?hafter))
     )
     :effect
     (and
         (not (height ?bpos ?hbefore))
         (height ?bpos ?hafter)
-        (has-block)
-        (increase (total_cost) 0)
+        ;increase cost by 1- block_cost ?bpos
+        (increase (total-cost) (- 1 (block_cost ?bpos)))
+        ;(has-block)
     )
 )
 
-(:action create-block
-    :parameters (?p - position)
-    :precondition
-    (and
-        (not (has-block))
-        (IS-DEPOT ?p)
-    )
-    :effect
-    (and
-        (has-block)
-        (increase (total_cost) 0)
-    )
-)
+; (:action create-block
+;     :parameters (?p - position)
+;     :precondition
+;     (and
+;         (not (has-block))
+;         (IS-DEPOT ?p)
+;     )
+;     :effect
+;     (and
+;         (has-block)
+;     )
+; )
 
-(:action destroy-block
-    :parameters (?p - position)
-    :precondition
-    (and
-        (has-block)
-        (IS-DEPOT ?p)
-    )
-    :effect
-    (and
-        (not (has-block))
-        (increase (total_cost) 0)
-    )
-)
+; (:action destroy-block
+;     :parameters (?p - position)
+;     :precondition
+;     (and
+;         (has-block)
+;         (IS-DEPOT ?p)
+;     )
+;     :effect
+;     (and
+;         (not (has-block))
+;     )
+; )
 )

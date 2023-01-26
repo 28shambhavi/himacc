@@ -90,9 +90,8 @@
     (= (block_cost pos-3-0) 1.333)
     (= (block_cost pos-3-1) 1)
     (= (block_cost pos-3-2) 0.666)
-    (= (total_cost) 0)
+    (= (total-cost) 0)
     (IS-DEPOT pos-2-0)
-    (not (has-block))
 )
 (:goal
 (and
@@ -101,17 +100,16 @@
     (height pos-0-2 n0)
     (height pos-1-0 n0)
     (height pos-1-1 n0)
-    (height pos-1-2 n3)
+    (height pos-1-2 n2)
     (height pos-2-0 n0)
     (height pos-2-1 n0)
     (height pos-2-2 n0)
     (height pos-3-0 n0)
     (height pos-3-1 n0)
     (height pos-3-2 n0)
-    (not (has-block))
 )
 )
-(:metric minimize (total_cost)
-)
+
+(:metric minimize (total-cost))
 
 )
