@@ -1,0 +1,1 @@
+PathSearchSolution{GenericState, Nothing}(:success, Term[create-block(pos-2-0), place-block(pos-3-0, n0, n1), create-block(pos-2-0), place-block(pos-3-0, n1, n2), create-block(pos-2-0), place-block(pos-3-0, n2, n3)])
