@@ -1,0 +1,10 @@
+PathSearchSolution{GenericState, DataStructures.PriorityQueue{UInt64, Tuple{Float32, Float32, Int64}, Base.Order.ForwardOrdering}}(:success, Term[
+    create-block(white), 
+    place-block(pos-2-0, pos-2-1, n1, n0, white), 
+    create-block(blue), 
+    place-block(pos-1-0, pos-1-1, n1, n0, blue), 
+    create-block(blue), 
+    place-block(pos-1-0, pos-2-0, n2, n1, blue), 
+    create-block(blue), 
+    remove-block(pos-2-0, pos-2-1, n1, n0), 
+    place-block(pos-2-0, pos-2-1, n1, n0, blue)])

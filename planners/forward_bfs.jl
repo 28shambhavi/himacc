@@ -12,6 +12,8 @@ function forward_bfs(domain::Domain, problem::Problem)
         if satisfy(domain, state, goal)
             # Return plan if goal is satisfied
             return plan
+            #print plan
+            println("Goal is satisfied\n", plan)
         end
         # Iterate over available actions and add successors to queue
 
@@ -22,5 +24,6 @@ function forward_bfs(domain::Domain, problem::Problem)
         end
     end
     # Return nothing upon failure
+    print("failed")
     return nothing
 end

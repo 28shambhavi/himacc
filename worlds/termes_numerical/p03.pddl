@@ -1,0 +1,100 @@
+(define (problem termes-00102-0048-4x3x4-random_towers_4x3_4_2_15)
+(:domain termes)
+
+(:objects
+    ;n0 n1 n2 n3 n4 n5- numb
+    pos-0-0 - position
+    pos-0-1 - position
+    pos-0-2 - position
+    pos-1-0 - position
+    pos-1-1 - position
+    pos-1-2 - position
+    pos-2-0 - position
+    pos-2-1 - position
+    pos-2-2 - position
+    pos-3-0 - position
+    pos-3-1 - position
+    pos-3-2 - position
+)
+(:init
+    (= (row pos-0-0) 0)
+    (= (row pos-0-1) 0)
+    (= (row pos-0-2) 0)
+    (= (row pos-1-0) 1)
+    (= (row pos-1-1) 1)
+    (= (row pos-1-2) 1)
+    (= (row pos-2-0) 2)
+    (= (row pos-2-1) 2)
+    (= (row pos-2-2) 2)
+    (= (row pos-3-0) 3)
+    (= (row pos-3-1) 3)
+    (= (row pos-3-2) 3)
+    (= (col pos-0-0) 0)
+    (= (col pos-0-1) 1)
+    (= (col pos-0-2) 2)
+    (= (col pos-1-0) 0)
+    (= (col pos-1-1) 1)
+    (= (col pos-1-2) 2)
+    (= (col pos-2-0) 0)
+    (= (col pos-2-1) 1)
+    (= (col pos-2-2) 2)
+    (= (col pos-3-0) 0)
+    (= (col pos-3-1) 1)
+    (= (col pos-3-2) 2)
+    (= (height pos-0-0) 0)
+    (= (height pos-0-1) 0)
+    (= (height pos-0-2) 0)
+    (= (height pos-1-0) 0)
+    (= (height pos-1-1) 0)
+    (= (height pos-1-2) 0)
+    (= (height pos-2-0) 0)
+    (= (height pos-2-1) 0)
+    (= (height pos-2-2) 0)
+    (= (height pos-3-0) 0)
+    (= (height pos-3-1) 0)
+    (= (height pos-3-2) 0)    
+    (= (block_cost pos-0-0) 1)
+    (= (block_cost pos-0-1) 1)
+    (= (block_cost pos-0-2) 1)
+    (= (block_cost pos-1-0) 1)
+    (= (block_cost pos-1-1) 1)
+    (= (block_cost pos-1-2) 1)
+    (= (block_cost pos-2-0) 1)
+    (= (block_cost pos-2-1) 1)
+    (= (block_cost pos-2-2) 1)
+    (= (block_cost pos-3-0) 1)
+    (= (block_cost pos-3-1) 1)
+    (= (block_cost pos-3-2) 1)
+    (= (path_cost pos-0-0) 0)
+    (= (path_cost pos-0-1) 0)
+    (= (path_cost pos-0-2) 0)
+    (= (path_cost pos-1-0) 0)
+    (= (path_cost pos-1-1) 0)
+    (= (path_cost pos-1-2) 0)
+    (= (path_cost pos-2-0) 0)
+    (= (path_cost pos-2-1) 0)
+    (= (path_cost pos-2-2) 0)
+    (= (path_cost pos-3-0) 0)
+    (= (path_cost pos-3-1) 0)
+    (= (path_cost pos-3-2) 0)
+    (= (total_cost) 0)
+    
+)
+(:goal
+(and
+    (= (height pos-0-0) 0)
+    (= (height pos-0-1) 1)
+    (= (height pos-0-2) 0)
+    (= (height pos-1-0) 0)
+    (= (height pos-1-1) 0)
+    (= (height pos-1-2) 0)
+    (= (height pos-2-0) 0)
+    (= (height pos-2-1) 0)
+    (= (height pos-2-2) 0)
+    (= (height pos-3-0) 2)
+    (= (height pos-3-1) 0)
+)
+)
+(:metric minimize (total_cost)
+)
+)

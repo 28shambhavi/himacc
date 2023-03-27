@@ -1,47 +1,55 @@
 (define (domain blocksworld)
-  (:requirements :strips :typing :equality :negative-preconditions :universal-preconditions :disjunctive-preconditions :fluents)
+  (:requirements :strips :typing :equality :negative-preconditions :universal-preconditions :disjunctive-preconditions :fluents :derived-predicates :conditional-effects :action-costs)
 
-; types location and agent
-
-; predicates 
-; block is at location l
-; block is on block
-; block is clear
-; agent a is holding block
-
-; actions
-
-; pick up block b from location l
-    ;precondtions
-    ;block is at location l
-    ;block is clear
-    ;agent a is not holding 
-
-    ;effect
-    ;agent a is holding
-
-; put down block b at location l
 
 (:types
     numb - object ;number of blocks, represents height
     position - object ;position of a block
 )
+
 (:predicates
     (height ?p - position ?h - numb)
-    (has-block)
     (SUCC ?n1 - numb ?n2 - numb)
     (NEIGHBOR ?p1 - position ?p2 - position)
-    (IS-DEPOT ?p - position)
 )
 
 (:functions
    (block_cost ?p - position)
+   (path_cost ?p - position)
    (total-cost)
    )
 
+; (:derived (path ?p - position ?hbefore - numb)
+;     (and 
+;         (exists (?n1 - position)
+;             (and
+;                 (NEIGHBOR ?p ?n1)
+;                 (height ?n1 ?hbefore)
+;             )
+;         )
+;     )
+; )
+
+; (:derived (path ?n1 - position)
+;     (and 
+;         (exists (?n2 - position)
+;             (and
+;                 (NEIGHBOR ?n1 ?n2)
+;             )
+;         )
+;     )
+    ; (and 
+    ; (exists (?npos - position)
+    ;     (and (NEIGHBOR ?p ?npos))
+    ; )
+                ; (exists (?hn - numb)
+                ;     (and
+                ;         (height ?npos ?hn)
+                ;         (SUCC ?hp ?hn)
+                ;         (path ?npos ?hn))
 
 (:action place-block
-    :parameters (?bpos - position ?n1 - position ?hbefore - numb ?hafter - numb)
+    :parameters (?bpos - position ?n1 - position ?hafter - numb ?hbefore - numb)
     :precondition
     (and
         (height ?bpos ?hbefore)
@@ -49,14 +57,36 @@
         ;(has-block)
         ;(not (IS-DEPOT ?bpos))
         (and (NEIGHBOR ?bpos ?n1) (height ?n1 ?hbefore))
-        ; true if any of the neighbors of bpos has height hbefore
-    )                
+        ; (exists (?n2 - position)
+        ;     (and
+        ;         (NEIGHBOR ?n1 ?n2)
+        ;         (exists (?hn - numb)
+        ;             (and
+        ;                 (height ?n2 ?hn)
+        ;                 (or 
+        ;                     ;height is n0
+        ;                     (forall (?heights - numb)
+        ;                         (and (not (SUCC ?hn ?heights)))
+        ;                     )
+
+        ;                 )
+        ;             )
+        ;     )
+        ; )
+        ; )
+        ; (path ?n1)
+    )
+        ; true if any of the neighbors of bpos has height hbefor                
     :effect
     (and
         (not (height ?bpos ?hbefore))
         (height ?bpos ?hafter)
         ;(not (has-block))
-        (increase (total-cost) (block_cost ?bpos))
+        (increase (total-cost) (+
+        (block_cost ?bpos)
+        (path_cost ?n1)
+        )
+        )
     )
 )
 
@@ -64,11 +94,8 @@
     :parameters (?bpos - position ?n1 - position ?hbefore - numb ?hafter - numb)
     :precondition
     (and
-        ;(NEIGHBOR ?rpos ?bpos)
-        ;(height ?rpos ?hafter)
         (height ?bpos ?hbefore)
         (SUCC ?hbefore ?hafter)
-        ;(not (has-block))
         (and (NEIGHBOR ?bpos ?n1) (height ?n1 ?hafter))
     )
     :effect
@@ -76,34 +103,41 @@
         (not (height ?bpos ?hbefore))
         (height ?bpos ?hafter)
         ;increase cost by 1- block_cost ?bpos
-        (increase (total-cost) (- 1 (block_cost ?bpos)))
-        ;(has-block)
+        (increase (total-cost) 
+            (+
+            (- 1 (block_cost ?bpos))
+            (path_cost ?n1)
+            )
+        )
     )
 )
-
-; (:action create-block
-;     :parameters (?p - position)
-;     :precondition
-;     (and
-;         (not (has-block))
-;         (IS-DEPOT ?p)
-;     )
-;     :effect
-;     (and
-;         (has-block)
-;     )
-; )
-
-; (:action destroy-block
-;     :parameters (?p - position)
-;     :precondition
-;     (and
-;         (has-block)
-;         (IS-DEPOT ?p)
-;     )
-;     :effect
-;     (and
-;         (not (has-block))
-;     )
-; )
 )
+
+; (:derived (path ?p - position ?hbefore - numb)
+;     (and 
+;         (exists (?n1 - position)
+;             (and
+;                 (NEIGHBOR ?p ?n1)
+;                 (height ?n1 ?hbefore)
+;             )
+;         )
+;     )
+; )
+
+; (:derived (path ?n1 - position)
+;     (and 
+;         (exists (?n2 - position)
+;             (and
+;                 (NEIGHBOR ?n1 ?n2)
+;             )
+;         )
+;     )
+    ; (and 
+    ; (exists (?npos - position)
+    ;     (and (NEIGHBOR ?p ?npos))
+    ; )
+                ; (exists (?hn - numb)
+                ;     (and
+                ;         (height ?npos ?hn)
+                ;         (SUCC ?hp ?hn)
+                ;         (path ?npos ?hn))

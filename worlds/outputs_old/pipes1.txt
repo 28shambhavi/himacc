@@ -1,0 +1,1 @@
+PathSearchSolution{GenericState, Nothing}(:success, Term[pickup(b), stack(b, c), pickup(a), stack(a, b)])
